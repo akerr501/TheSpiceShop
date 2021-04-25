@@ -7,11 +7,11 @@
 */
 // Express
 var express = require('express');   // We are using the express library for the web server
-// var exp_handle = require("express-handlebars"); // connect handlebars
+var exp_handle = require("express-handlebars"); // connect handlebars
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 var port    = process.env.PORT || 6969;                 // nice
-// app.engine('handlebars', exp_handle({ defualtLayout: "main"})); // set the default layout
-// app.set('view engine', 'handlebars'); // idk what these do
+app.engine('handlebars', exp_handle({ defualtLayout: "main"})); // set the default layout
+app.set('view engine', 'handlebars'); // idk what these do
 app.use(express.json());
 app.use(express.static('public'));
 // Database
