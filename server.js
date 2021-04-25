@@ -34,7 +34,7 @@ var households = [
   {"HouseholdID": 1, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "yessirski2", "Password": "1234"},
 ];
 var members = [
-  {"MemberID": 0, "FirstName": "Adam", "MiddleName": "Christopher", "LastName": "Kerr", "HouseholdID": 0}
+  {"MemberID": 0, "FirstName": "Adam", "MiddleName": "Christopher", "LastName": "Kerr", "HouseholdID": 0},
   {"MemberID": 1, "FirstName": "Santosh", "LastName": "Ramesh", "HouseholdID": 0}
 ];
 var spice_blends = [
