@@ -1,5 +1,97 @@
+/* GENERAL */
+
+body{
+    background-color: white;
+    color: black;
+    margin: 0;
+    font-size: large;
+}
+
+a{
+    text-decoration: none;
+    color: #72ad86;
+}
+
+main {
+  margin-left:10%;
+  margin-bottom: 30px;
+  padding:1px 16px;
+}
+
+h1 {
+  margin: 0px;
+}
+
+/* NAVIGATION BAR */
+
 #head-logo {
   border-radius: 50%;
-  width: 10%;
-  height: 10%;
+  width: 95%;
+  height: 80%;
+}
+
+.site-title{
+    background-color: #72ad86;
+    padding: 20px 30px;
+    margin: 0px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navlist{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 8%;
+  background-color: #72ad86;
+  height: 100%; /* Full height */
+  position: fixed; /* Make it stick, even on scroll */
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+  border-bottom: 1.5px solid #394a3f;
+  border-top: 1.5px solid #394a3f;
+}
+
+.navitem{
+    display: inline-block;
+}
+
+.navlink a{
+    padding: 10px 16px;
+    display: inline-block;
+    color: white;
+}
+
+.navlink a:hover{text-decoration: none;}
+
+/* INPUT FORMS */
+
+
+
+/* TABLES */
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+}
+
+th {
+  background-color: #8fd9a8;
+}
+
+th, td {
+  border: 1px solid #b4a5a5;
+  padding: 12px;
+}
+
+td.edit {
+  border: 0px;
+  background-color: #FFFFFF;
+}
+
+tr:nth-child(even){
+  background-color: #e3e3e3;
+}
+
+tr:hover {
+  background-color: #9fb8ad;
 }

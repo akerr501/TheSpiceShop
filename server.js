@@ -35,7 +35,10 @@ var households = [
 ];
 var members = [
   {"MemberID": 0, "FirstName": "Adam", "MiddleName": "Christopher", "LastName": "Kerr", "HouseholdID": 0},
-  {"MemberID": 1, "FirstName": "Santosh", "MiddleName": "","LastName": "Ramesh", "HouseholdID": 1}
+  {"MemberID": 1, "FirstName": "Santosh", "MiddleName": "","LastName": "Ramesh", "HouseholdID": 1},
+  {"MemberID": 2, "FirstName": "Peter", "MiddleName": "","LastName": "Parker", "HouseholdID": 0},
+  {"MemberID": 3, "FirstName": "John", "MiddleName": "","LastName": "Smith", "HouseholdID": 1},
+  {"MemberID": 4, "FirstName": "Billy", "MiddleName": "","LastName": "Batson", "HouseholdID": 1}
 ];
 var spice_blends = [
   {"BlendID": 0, "SpiceID": 0},
