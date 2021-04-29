@@ -6,29 +6,31 @@
 {{> table title="Household-to-Blend Relationships" map=household_blends}}
 
 <br><br>
-<form id="blend-form">
-  <label for="bname">Blend Name:</label><br>
-  <input type="text" id="bname" name="bname"><br>
-  <label for="quantity">Blend Quantity:</label><br>
-  <input type="number" id="quantity" name="quantity"><br>
-  <label for="bdescription">Blend Description:</label><br>
-  <input type="text" id="bdescription" name="bdescription"><br><br>
-  <input type="submit" value="Submit" id="blend-submit">
-</form>
-<br><br>
-<form id="blendtohouse-form">
-  <label for="households">Household ID:</label>
-  <select name="households" id="household-dropdown">
-    {{#each households}}
-      <option value="{{HouseholdID}}">{{HouseholdID}}</option>
-    {{/each}}
-  </select><br>
-  <label for="blends">Blend ID:</label>
-  <select name="blends" id="blend-dropdown">
-    {{#each blends}}
-      <option value="{{BlendID}}">{{BlendID}}</option>
-    {{/each}}
-  </select><br><br>
-  <input type="submit" value="Submit" id="blendtohouse-form">
-</form>
+<div id="form-container">
+  <form id="blend-form">
+    <label for="bname">Blend Name:</label><br>
+    <input type="text" id="bname" name="bname"><br>
+    <label for="quantity">Blend Quantity:</label><br>
+    <input type="number" id="quantity" name="quantity"><br>
+    <label for="bdescription">Blend Description:</label><br>
+    <input type="text" id="bdescription" name="bdescription"><br><br>
+    <input type="submit" value="Submit" id="blend-submit">
+  </form>
+  <br><br>
+  <form id="blendtohouse-form">
+    <label for="households">Household ID:</label><br>
+    <select name="households" id="household-dropdown">
+      {{#each households}}
+        <option value="{{HouseholdID}}">{{HouseholdID}}</option>
+      {{/each}}
+    </select><br>
+    <label for="blends">Blend ID:</label><br>
+    <select name="blends" id="blend-dropdown">
+      {{#each blends}}
+        <option value="{{BlendID}}">{{BlendID}}</option>
+      {{/each}}
+    </select><br><br>
+    <input type="submit" value="Submit" id="blendtohouse-submit">
+  </form>
+</div>
 </main>

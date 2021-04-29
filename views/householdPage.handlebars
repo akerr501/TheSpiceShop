@@ -5,35 +5,37 @@
 {{> table title="Household Following" map=household_following}}
 
 <br><br>
-<form id="house-form">
-  <label for="straddr">Street Address:</label><br>
-  <input type="text" id="straddr" name="straddr"><br>
-  <label for="cityaddr">City:</label><br>
-  <input type="text" id="cityaddr" name="cityaddr"><br>
-  <label for="stateaddr">State:</label><br>
-  <input type="text" id="stateaddr" name="stateaddr"><br>
-  <label for="zipaddr">Zip Code:</label><br>
-  <input type="text" id="zipaddr" name="zipaddr"><br>
-  <label for="username">Username:</label><br>
-  <input type="text" id="username" name="username"><br>
-  <label for="pwd">Password:</label><br>
-  <input type="password" id="pwd" name="pwd"><br><br>
-  <input type="submit" value="Submit" id="house-submit">
-</form>
-<br><br>
-<form id="housetohouse-form">
-  <label for="households1">Household ID:</label>
-  <select name="households1" id="member-dropdown">
-    {{#each households}}
-      <option value="{{HouseholdID}}">{{HouseholdID}}</option>
-    {{/each}}
-  </select><br>
-  <label for="households2">Following Household ID:</label>
-  <select name="households2" id="household-dropdown">
-    {{#each households}}
-      <option value="{{HouseholdID}}">{{HouseholdID}}</option>
-    {{/each}}
-  </select><br><br>
-  <input type="submit" value="Submit" id="housetohouse-submit">
-</form>
+<div id="form-container">
+  <form id="house-form">
+    <label for="straddr">Street Address:</label><br>
+    <input type="text" id="straddr" name="straddr"><br>
+    <label for="cityaddr">City:</label><br>
+    <input type="text" id="cityaddr" name="cityaddr"><br>
+    <label for="stateaddr">State:</label><br>
+    <input type="text" id="stateaddr" name="stateaddr"><br>
+    <label for="zipaddr">Zip Code:</label><br>
+    <input type="text" id="zipaddr" name="zipaddr"><br>
+    <label for="username">Username:</label><br>
+    <input type="text" id="username" name="username"><br>
+    <label for="pwd">Password:</label><br>
+    <input type="password" id="pwd" name="pwd"><br><br>
+    <input type="submit" value="Submit" id="house-submit">
+  </form>
+  <br><br>
+  <form id="housetohouse-form">
+    <label for="households1">Household ID:</label><br>
+    <select name="households1" id="member-dropdown">
+      {{#each households}}
+        <option value="{{HouseholdID}}">{{HouseholdID}}</option>
+      {{/each}}
+    </select><br>
+    <label for="households2">Following Household ID:</label><br>
+    <select name="households2" id="household-dropdown">
+      {{#each households}}
+        <option value="{{HouseholdID}}">{{HouseholdID}}</option>
+      {{/each}}
+    </select><br><br>
+    <input type="submit" value="Submit" id="housetohouse-submit">
+  </form>
+</div>
 </main>

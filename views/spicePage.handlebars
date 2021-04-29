@@ -6,27 +6,29 @@
 {{> table title="Spice-to-Blend Relationships" map=spice_blends}}
 
 <br><br>
-<form id="spice-form">
-  <label for="sname">Spice Name:</label><br>
-  <input type="text" id="sname" name="sname"><br>
-  <label for="sdescription">Spice Description:</label><br>
-  <input type="text" id="sdescription" name="sdescription"><br><br>
-  <input type="submit" value="Submit" id="spice-submit">
-</form>
-<br><br>
-<form id="spicetoblend-form">
-  <label for="spices">Spice ID:</label>
-  <select name="spices" id="spice-dropdown">
-    {{#each spices}}
-      <option value="{{SpiceID}}">{{SpiceID}}</option>
-    {{/each}}
-  </select><br>
-  <label for="blends">Blend ID:</label>
-  <select name="blends" id="blend-dropdown">
-    {{#each blends}}
-      <option value="{{BlendID}}">{{BlendID}}</option>
-    {{/each}}
-  </select><br><br>
-  <input type="submit" value="Submit" id="spicetoblend-submit">
-</form>
+<div id="form-container">
+  <form id="spice-form">
+    <label for="sname">Spice Name:</label><br>
+    <input type="text" id="sname" name="sname"><br>
+    <label for="sdescription">Spice Description:</label><br>
+    <input type="text" id="sdescription" name="sdescription"><br><br>
+    <input type="submit" value="Submit" id="spice-submit">
+  </div>
+  <br><br>
+  <form id="spicetoblend-form">
+    <label for="spices">Spice ID:</label><br>
+    <select name="spices" id="spice-dropdown">
+      {{#each spices}}
+        <option value="{{SpiceID}}">{{SpiceID}}</option>
+      {{/each}}
+    </select><br>
+    <label for="blends">Blend ID:</label><br>
+    <select name="blends" id="blend-dropdown">
+      {{#each blends}}
+        <option value="{{BlendID}}">{{BlendID}}</option>
+      {{/each}}
+    </select><br><br>
+    <input type="submit" value="Submit" id="spicetoblend-submit">
+  </div>
+</div>
 </main>
