@@ -1,0 +1,34 @@
+{{!-- Handlebar for tables to be reused --}}
+{{!-- Author: Adam Kerr --}}
+{{!-- Created on: 4.29.21 --}}
+
+{{!--
+data must be formatted as such in server.js
+var spices = [
+{"SpiceID": 0, "SpiceName": "Paprika", "SpiceDescription": "Spicy"},
+{"SpiceID": 1, "SpiceName": "Curry Powder", "SpiceDescription": "smells like curry"}
+]
+ --}}
+
+
+<h2 class="table-header">{{title}}</h2>
+<table class="data-table">
+<thead class="keys">
+  <tr>
+    {{#each map.[0]}}
+      <th>{{@key}}</th>
+    {{/each}}
+  </tr>
+</thead>
+<tbody class="data-rows">
+  {{#each map}}
+    <tr class="data-row" id="editable-{{@index}}">
+    	{{#each this}}
+        <td class="data">{{this}}</td>
+      {{/each}}
+      <td class="edit"><input type="submit" value="Edit" id="edit-button-{{@index}}"></td>
+      <td class="delete"><input type="submit" value="Delete" id="delete-button-{{@index}}"></td>
+    </tr>
+  {{/each}}
+</tbody>
+</table>

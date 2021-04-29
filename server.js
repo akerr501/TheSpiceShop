@@ -30,8 +30,8 @@ var blends = [
   {"BlendID": 1, "BlendName": "not so Spicy Blend", "Quantity": 2, "BlendDescription": "not very spicy"}
 ];
 var households = [
-  {"HouseholdID": 0, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "yessirski", "Password": "1234"},
-  {"HouseholdID": 1, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "yessirski2", "Password": "1234"},
+  {"HouseholdID": 0, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "coolhouse", "Password": "1234"},
+  {"HouseholdID": 1, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "coolhouse2", "Password": "1234"},
 ];
 var members = [
   {"MemberID": 0, "FirstName": "Adam", "MiddleName": "Christopher", "LastName": "Kerr", "HouseholdID": 0},
