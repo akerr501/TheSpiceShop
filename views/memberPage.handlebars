@@ -4,19 +4,19 @@
 {{> table title="Members" map=members}}
 
 <br><br>
-<form>
-  <label for="fname">First name:</label><br>
+<form id="member-form">
+  <label for="fname">First Name:</label><br>
   <input type="text" id="fname" name="fname"><br>
-  <label for="mname">Middle name (optional):</label><br>
+  <label for="mname">Middle Name (optional):</label><br>
   <input type="text" id="mname" name="mname"><br>
-  <label for="lname">Last name:</label><br>
+  <label for="lname">Last Name:</label><br>
   <input type="text" id="lname" name="lname"><br>
   <label for="households">Household ID:</label>
-  <select name="households" id="memmber-dropdown">
+  <select name="households" id="member-dropdown">
     {{#each householdIDs}}
       <option value="{{this}}">{{this}}</option>
     {{/each}}
   </select><br><br>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" id = "member-submit">
 </form>
 </main>
