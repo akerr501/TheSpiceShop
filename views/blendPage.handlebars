@@ -1,6 +1,8 @@
 {{!-- Blend page, displays Household, Blend, and Household_Blend tables --}}
 
 <main class="blends-container">
+<input type="text" placeholder="Search..." class="search" name="search">
+<input type="submit" value="Search" class="search-submit">
 {{> etable title="Blends" map=blends}}
 {{> table title="Households" map=households}}
 {{> table title="Household-to-Blend Relationships" map=household_blends}}

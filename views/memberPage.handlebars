@@ -1,6 +1,8 @@
 {{!-- Members page, displays Member table --}}
 
 <main class="members-container">
+<input type="text" placeholder="Search..." class="search" name="search">
+<input type="submit" value="Search" class="search-submit">
 {{> etable title="Members" map=members}}
 
 <br><br>

@@ -94,6 +94,16 @@ input[type=submit] {
   cursor: pointer;
 }
 
+input[type=text].search {
+  width: 45%;
+  margin-top: 2%;
+}
+
+input[type=submit].search-submit {
+  width: 15%;
+  margin-top: 2%;
+}
+
 /* TABLES */
 
 table {

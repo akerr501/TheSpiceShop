@@ -1,6 +1,8 @@
 {{!-- Households page, displays Household and Household_Following tables --}}
 
 <main class="households-container">
+<input type="text" placeholder="Search..." class="search" name="search">
+<input type="submit" value="Search" class="search-submit">
 {{> etable title="Households" map=households}}
 {{> table title="Household Following" map=household_following}}
 
