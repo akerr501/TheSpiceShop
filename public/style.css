@@ -140,3 +140,23 @@ td input[type=submit] {
 input[type=submit].delete {
   background-color: #fb3640;
 }
+
+/* Welcome screen */
+
+#welcome-img {
+  border-radius: 25%;
+  width: 35%;
+  height: 35%;
+  margin-left: 30%;
+}
+
+#intro {
+  margin-left: 5%;
+  margin-right: 5%;
+  align-content: center;
+}
+
+#welcome {
+  margin-left: 25%;
+  margin-top: 1%;
+}
