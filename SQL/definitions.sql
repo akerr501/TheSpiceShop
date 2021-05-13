@@ -66,7 +66,7 @@ CREATE TABLE Spice_Blends (
 
     
     FOREIGN KEY (BlendID) REFERENCES Blends (BlendID),
-    FOREIGN KEY (SpicesID) REFERENCES Spices (SpicesID),
-    PRIMARY KEY (BlendID, SpicesID)
+    FOREIGN KEY (SpiceID) REFERENCES Spices (SpiceID),
+    PRIMARY KEY (BlendID, SpiceID)
 );
 
