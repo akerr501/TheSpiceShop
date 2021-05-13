@@ -1,3 +1,12 @@
+-- Dropping if Exists
+DROP TABLE IF EXISTS Spice_Blends;
+DROP TABLE IF EXISTS Household_Blends;
+DROP TABLE IF EXISTS Household_Followings;
+DROP TABLE IF EXISTS Spices;
+DROP TABLE IF EXISTS Blends;
+DROP TABLE IF EXISTS Members;
+DROP TABLE IF EXISTS Households;
+
 -- Main Tables
 CREATE TABLE Households (
     HouseholdID INTEGER (20) AUTO_INCREMENT NOT NULL,
@@ -57,16 +66,45 @@ CREATE TABLE Household_Blends (
     FOREIGN KEY (HouseholdID) REFERENCES Households(HouseholdID),
     FOREIGN KEY (BlendID) REFERENCES Blends(BlendID),
     PRIMARY KEY (HouseholdID, BlendID)
-
 );
 
 CREATE TABLE Spice_Blends (
     BlendID INTEGER (20),
     SpiceID INTEGER (20),
 
-    
     FOREIGN KEY (BlendID) REFERENCES Blends (BlendID),
     FOREIGN KEY (SpiceID) REFERENCES Spices (SpiceID),
     PRIMARY KEY (BlendID, SpiceID)
 );
 
+-- Inserting Sample Data
+INSERT INTO Households (AddressStreet, AddressCity, AddressState, AddressZip, CreationDate, UserName, Password) VALUES
+("14236 NW Jamestown RD", "Beaverton", "OR", 97206, 17/12/2015, "GoodBoy", "Password123"), 
+("82931 SE Charleston DR", "Portland", "OR", 972229, 20/07/2006, "BadBoy", "231ILoveApples");
+
+INSERT INTO Members (FirstName, MiddleName, LastName, HouseholdID) VALUES
+("Steve", "P", "Nash", 1),
+("Bob", "T", "Builder", 2);
+
+INSERT INTO Spices (SpiceName, SpiceDescription) VALUES
+("Paprica", "Very Delicious"),
+("Pepper", "Generic Bland Spice"),
+("Salt", "Makes things taste better"),
+("Sugar", "Sweetness");
+
+INSERT INTO Blends (BlendName, Quantity, BlendDescription) VALUES
+("Salt-n-Sweet", 2, "This is a mixture of salt and sugar"),
+("Pepper Daddy", 2, "Maximizing the pepper & salt flavors!");
+
+INSERT INTO Household_Followings (HouseholdID_1, HouseholdID_2) VALUES
+(1, 2);
+
+INSERT INTO Spice_Blends (BlendID, SpiceID) VALUES
+(1, 3), 
+(1, 4),
+(2, 2),
+(2, 3);
+
+INSERT INTO Household_Blends (HouseholdID, BlendID) VALUES
+(1, 1),
+(1, 2);
