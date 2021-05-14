@@ -36,7 +36,7 @@ SELECT * FROM Members WHERE
 -- Query to get every row from Blends table that has one column match the input
 -- :input is variable from search bar
 SELECT * FROM Blends WHERE
-:search in (BlendID, BlendName, Quantity, BlendDescription)s; 
+:search in (BlendID, BlendName, Quantity, BlendDescription)s;
 
 -- Query to get every row from Spices table that has one column match the input
 -- :input is variable from search bar
@@ -123,16 +123,16 @@ WHERE BlendID = :bid;
 
 -- Query to delete row in Households table where ID matches input
 -- :id is input to match ID
-DELETE FROM Households WHERE HouseholdID == :id;
+DELETE FROM Households WHERE HouseholdID = :id;
 
 -- Query to delete row in Members table where ID matches input
 -- :id is input to match ID
-DELETE FROM Members WHERE MemberID == :id;
+DELETE FROM Members WHERE MemberID = :id;
 
 -- Query to delete row in Spices table where ID matches input
 -- :id is input to match ID
-DELETE FROM Spices WHERE SpiceID == :id;
+DELETE FROM Spices WHERE SpiceID = :id;
 
 -- Query to delete row in Blends table where ID matches input
 -- :id is input to match ID
-DELETE FROM Blends WHERE BlendID == :id;
+DELETE FROM Blends WHERE BlendID = :id;
