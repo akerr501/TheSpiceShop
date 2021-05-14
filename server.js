@@ -68,46 +68,85 @@ app.get('/', function(req, res, next) {
 // Households route, displays Household and Household_Following tables
 app.get('/households', function(req, res, next) {
   console.log("Serving the Households Page");
-  res.status(200);
-  res.render("householdPage", {
-    script: "./households.js",
-    households: households,
-    household_following: household_following
+  var query1 = "SELECT * FROM Households;";
+  var query2 = "SELECT * FROM Household_Followings;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempHouseholds = results;
+    db.pool.query(query2, function (err, results, fields){
+      res.status(200);
+      res.render("householdPage", {
+        script: "./households.js",
+        households: tempHouseholds,
+        household_following: results
+      });
+    });
   });
 });
 
 // Members route, displays Member table
 app.get('/members', function(req, res, next) {
   console.log("Serving the Members Page");
-  res.status(200);
-  res.render("memberPage", {
-    script: "./members.js",
-    members: members,
-    householdIDs: [0,1]
+  var query1 = "SELECT * FROM Members;";
+  var query2 = "SELECT * FROM Households;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempMembers = results;
+    db.pool.query(query2, function (err, results, fields){
+      var houseIDs = [];
+      for(var i = 0; i < results.length; i++)
+        houseIDs.push(results[i]["HouseholdID"]);
+      res.status(200);
+      res.render("memberPage", {
+        script: "./members.js",
+        members: tempMembers,
+        householdIDs: houseIDs
+      });
+    });
   });
 });
 
 // Spices route, displays Spice, Blend, and Spice_Blend tables
 app.get('/spices', function(req, res, next) {
   console.log("Serving the Spices Page");
-  res.status(200);
-  res.render("spicePage", {
-    script: "./spices.js",
-    spices: spices,
-    blends: blends,
-    spice_blends: spice_blends
+  var query1 = "SELECT * FROM Spices;";
+  var query2 = "SELECT * FROM Blends;";
+  var query3 = "SELECT * FROM Spice_Blends;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempSpices = results;
+    db.pool.query(query2, function (err, results, fields){
+      var tempBlends = results;
+      db.pool.query(query3, function (err, results, fields){
+        res.status(200);
+        res.render("spicePage", {
+          script: "./spices.js",
+          spices: tempSpices,
+          blends: tempBlends,
+          spice_blends: results
+        });
+      });
+    });
   });
 });
 
 // Blends route, displays Household, Blend, and Household_Blend tables
 app.get('/blends', function(req, res, next) {
   console.log("Serving the Blends Page");
-  res.status(200);
-  res.render("blendPage", {
-    script: "./blends.js",
-    blends: blends,
-    households: households,
-    household_blends: household_blends
+  var query1 = "SELECT * FROM Blends;";
+  var query2 = "SELECT * FROM Households;";
+  var query3 = "SELECT * FROM Household_Blends;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempBlends = results;
+    db.pool.query(query2, function (err, results, fields){
+      var tempHouseholds = results;
+      db.pool.query(query3, function (err, results, fields){
+        res.status(200);
+        res.render("blendPage", {
+          script: "./blends.js",
+          blends: tempBlends,
+          households: tempHouseholds,
+          household_blends: results
+        });
+      });
+    });
   });
 });
 
