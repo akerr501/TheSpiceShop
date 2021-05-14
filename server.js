@@ -283,8 +283,62 @@ app.post("/makeBlendToHouse", function(req, res){
   })
 });
 
+// delete Household route, deletes row into Household table from body data
+app.post("/deleteHousehold", function(req, res){
+  var query1 = "DELETE FROM Household_Blends WHERE HouseholdID = " + req.body.id + ";";
+  var query2 = "DELETE FROM Members WHERE HouseholdID = " + req.body.id + ";";
+  var query3 = "DELETE FROM Household_Followings WHERE HouseholdID_1 = " + req.body.id + " OR HouseholdID_2 = " + req.body.id + ";";
+  var query4 = "DELETE FROM Households WHERE HouseholdID = " + req.body.id + ";";
+  console.log("Deleting Household with query: " + query4);
+  db.pool.query(query1, function (err, results, fields){
+    db.pool.query(query2, function (err, results, fields){
+      db.pool.query(query3, function (err, results, fields){
+        db.pool.query(query4, function (err, results, fields){
+          res.send(results);
+        });
+      });
+    });
+  });
+});
+
+// delete Blend route, deletes row into Blend table from body data
+app.post("/deleteBlend", function(req, res){
+  var query1 = "DELETE FROM Spice_Blends WHERE BlendID = " + req.body.id + ";";
+  var query2 = "DELETE FROM Household_Blends WHERE BlendID = " + req.body.id + ";";
+  var query3 = "DELETE FROM Blends WHERE BlendID = " + req.body.id + ";";
+  console.log("Deleting Blend with query: " + query3);
+  db.pool.query(query1, function (err, results, fields){
+    db.pool.query(query2, function (err, results, fields){
+      db.pool.query(query3, function (err, results, fields){
+        res.send(results);
+      });
+    });
+  });
+});
+
+// delete Spice route, deletes row into Spice table from body data
+app.post("/deleteSpice", function(req, res){
+  var query1 = "DELETE FROM Spice_Blends WHERE SpiceID = " + req.body.id + ";";
+  var query2 = "DELETE FROM Spices WHERE SpiceID = " + req.body.id + ";";
+  console.log("Deleting Spice with query: " + query1);
+  db.pool.query(query1, function (err, results, fields){
+    db.pool.query(query2, function (err, results, fields){
+      res.send(results);
+    });
+  });
+});
+
+// delete Member route, deletes row into Member table from body data
+app.post("/deleteMember", function(req, res){
+  var query = "DELETE FROM Members WHERE MemberID = " + req.body.id + ";";
+  console.log("Deleting Member with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  });
+});
+
 
 // Listen to the port defined at top
 app.listen(port, function(){
   console.log("Server is listening on this port:", port);
-})
+});
