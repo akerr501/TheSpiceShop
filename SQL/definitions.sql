@@ -10,14 +10,14 @@ DROP TABLE IF EXISTS Households;
 -- Main Tables
 CREATE TABLE Households (
     HouseholdID INTEGER (20) AUTO_INCREMENT NOT NULL,
-    AddressStreet INTEGER (10) NOT NULL,
+    AddressStreet VARCHAR (10) NOT NULL,
     AddressCity VARCHAR (30) NOT NULL,
     AddressState VARCHAR (20) NOT NULL,
-    AddressZip INTEGER(10) NOT NULL,
-    CreationDate DATETIME NOT NULL,
+    AddressZip VARCHAR(10) NOT NULL,
+    CreationDate DATE NOT NULL,
     UserName VARCHAR (30) NOT NULL,
     Password VARCHAR (30) NOT NULL,
-    
+
     PRIMARY KEY (HouseholdID)
 );
 
@@ -79,8 +79,8 @@ CREATE TABLE Spice_Blends (
 
 -- Inserting Sample Data
 INSERT INTO Households (AddressStreet, AddressCity, AddressState, AddressZip, CreationDate, UserName, Password) VALUES
-("14236 NW Jamestown RD", "Beaverton", "OR", 97206, 17/12/2015, "GoodBoy", "Password123"), 
-("82931 SE Charleston DR", "Portland", "OR", 972229, 20/07/2006, "BadBoy", "231ILoveApples");
+("14236 NW Jamestown RD", "Beaverton", "OR", "97206", STR_TO_DATE('12/17/2015', '%m/%d/%Y'), "GoodBoy", "Password123"),
+("82931 SE Charleston DR", "Portland", "OR", "972229", STR_TO_DATE('07/20/2006', '%m/%d/%Y'), "BadBoy", "231ILoveApples");
 
 INSERT INTO Members (FirstName, MiddleName, LastName, HouseholdID) VALUES
 ("Steve", "P", "Nash", 1),
@@ -100,7 +100,7 @@ INSERT INTO Household_Followings (HouseholdID_1, HouseholdID_2) VALUES
 (1, 2);
 
 INSERT INTO Spice_Blends (BlendID, SpiceID) VALUES
-(1, 3), 
+(1, 3),
 (1, 4),
 (2, 2),
 (2, 3);

@@ -1,12 +1,12 @@
 {{!-- Members page, displays Member table --}}
 
 <main class="members-container">
-<input type="text" placeholder="Search..." class="search" name="search">
-<input type="submit" value="Search" class="search-submit">
+<input type="text" placeholder="Search..." class="search" name="search" id = "search">
+<a href="/members" id="myLink"><input type="submit" value="Search" class="search-submit" id ="search-submit"></a>
 {{> etable title="Members" map=members}}
 
 <br><br>
-<form id="member-form">
+<div id="member-form">
   <label for="fname">First Name:</label><br>
   <input type="text" id="fname" name="fname"><br>
   <label for="mname">Middle Name (optional):</label><br>
@@ -20,5 +20,5 @@
     {{/each}}
   </select><br><br>
   <input type="submit" value="Submit" id = "member-submit">
-</form>
+</div>
 </main>

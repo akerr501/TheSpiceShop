@@ -1,15 +1,15 @@
 {{!-- Blend page, displays Household, Blend, and Household_Blend tables --}}
 
 <main class="blends-container">
-<input type="text" placeholder="Search..." class="search" name="search">
-<input type="submit" value="Search" class="search-submit">
+<input type="text" placeholder="Search..." class="search" name="search" id = "search">
+<a href="/blends" id="myLink"><input type="submit" value="Search" class="search-submit" id ="search-submit"></a>
 {{> etable title="Blends" map=blends}}
 {{> table title="Households" map=households}}
 {{> table title="Household-to-Blend Relationships" map=household_blends}}
 
 <br><br>
 <div id="form-container">
-  <form id="blend-form">
+  <div id="blend-form">
     <label for="bname">Blend Name:</label><br>
     <input type="text" id="bname" name="bname"><br>
     <label for="quantity">Blend Quantity:</label><br>
@@ -17,9 +17,9 @@
     <label for="bdescription">Blend Description:</label><br>
     <input type="text" id="bdescription" name="bdescription"><br><br>
     <input type="submit" value="Submit" id="blend-submit">
-  </form>
+  </div>
   <br><br>
-  <form id="blendtohouse-form">
+  <div id="blendtohouse-form">
     <label for="households">Household ID:</label><br>
     <select name="households" id="household-dropdown">
       {{#each households}}
@@ -33,6 +33,6 @@
       {{/each}}
     </select><br><br>
     <input type="submit" value="Submit" id="blendtohouse-submit">
-  </form>
+  </div>
 </div>
 </main>

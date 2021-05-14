@@ -1,23 +1,23 @@
 {{!-- Spices page, displays Spice, Blend, and Spice_Blend tables --}}
 
 <main class="spices-container">
-<input type="text" placeholder="Search..." class="search" name="search">
-<input type="submit" value="Search" class="search-submit">
+<input type="text" placeholder="Search..." class="search" name="search" id = "search">
+<a href="/spices" id="myLink"><input type="submit" value="Search" class="search-submit" id ="search-submit"></a>
 {{> etable title="Spices" map=spices}}
 {{> table title="Blends" map=blends}}
 {{> table title="Spice-to-Blend Relationships" map=spice_blends}}
 
 <br><br>
 <div id="form-container">
-  <form id="spice-form">
+  <div id="spice-form">
     <label for="sname">Spice Name:</label><br>
     <input type="text" id="sname" name="sname"><br>
     <label for="sdescription">Spice Description:</label><br>
     <input type="text" id="sdescription" name="sdescription"><br><br>
     <input type="submit" value="Submit" id="spice-submit">
-  </form>
+  </div>
   <br><br>
-  <form id="spicetoblend-form">
+  <div id="spicetoblend-form">
     <label for="spices">Spice ID:</label><br>
     <select name="spices" id="spice-dropdown">
       {{#each spices}}
@@ -31,6 +31,6 @@
       {{/each}}
     </select><br><br>
     <input type="submit" value="Submit" id="spicetoblend-submit">
-  </form>
+  </div>
 </div>
 </main>

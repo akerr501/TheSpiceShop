@@ -26,38 +26,22 @@ SELECT * FROM Spice_Blends;
 -- Query to get every row from Households table that has one column match the input
 -- :input is variable from search bar
 SELECT * FROM Households WHERE
-HouseholdID == :input OR
-AddressStreet == :input OR
-AddressCity == :input OR
-AddressState == :input OR
-AddressZip == :input OR
-CreationDate == :input OR
-UserName == :input OR
-Password == :input;
+:search in (HouseholdID, AddressStreet, AddressCity, AddressState, AddressZip, CreationDate, UserName, Password);
 
 -- Query to get every row from Members table that has one column match the input
 -- :input is variable from search bar
 SELECT * FROM Members WHERE
-MemberID == :input OR
-FirstName == :input OR
-MiddleName == :input OR
-LastName == :input OR
-HouseholdID == :input;
+:search in (MemberID, FirstName, MiddleName, LastName, HouseholdID);
 
 -- Query to get every row from Blends table that has one column match the input
 -- :input is variable from search bar
 SELECT * FROM Blends WHERE
-BlendID == :input OR
-BlendName == :input OR
-Quantity == :input OR
-BlendDescription == :input;
+:search in (BlendID, BlendName, Quantity, BlendDescription)s; 
 
 -- Query to get every row from Spices table that has one column match the input
 -- :input is variable from search bar
 SELECT * FROM Spices WHERE
-SpiceID == :input OR
-SpiceName == :input OR
-SpiceDescription == :input;
+:search in (SpiceID, SpiceName, SpiceDescription);
 
 
 -- INSERT QUERIES FOR ADDING A NEW ROW TO TABLES
@@ -65,7 +49,7 @@ SpiceDescription == :input;
 -- Query to insert row into Households table with input variables
 -- Variables from input form are :strInput, :cityInput, :staInput, :zipInput, :dateInput, :nameInput, :passInput
 INSERT INTO Households (AddressStreet, AddressCity, AddressState, AddressZip, CreationDate, UserName, Password) VALUES
-(:strInput, :cityInput, :staInput, :zipInput, :dateInput, :nameInput, :passInput);
+(:strInput, :cityInput, :staInput, :zipInput, STR_TO_DATE(:dateInput, '%m/%d/%Y'), :nameInput, :passInput);
 
 -- Query to insert row into Members table with input variables
 -- Variables from input form are :fnInput, :mnInput, :lnInput, :housID
@@ -80,7 +64,7 @@ INSERT INTO Spices (SpiceName, SpiceDescription) VALUES
 -- Query to insert row into Blends table with input variables
 -- Variables from input form are :nInput, :qInput, desInput
 INSERT INTO Blends (BlendName, Quantity, BlendDescription) VALUES
-(:nInput, :qInput, desInput);
+(:nInput, :qInput, :desInput);
 
 -- Query to insert row into Household_Followings table with input variables
 -- Variables from input form are :idInputOne, :idInputTwo

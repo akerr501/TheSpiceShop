@@ -18,43 +18,8 @@ app.use(express.static('public'));
 var db = require('./connector'); // connect database
 
 /*
-    ROUTES
+    GET ROUTES
 */
-
-var spices = [
-  {"SpiceID": 0, "SpiceName": "Paprika", "SpiceDescription": "Spicy"},
-  {"SpiceID": 1, "SpiceName": "Curry Powder", "SpiceDescription": "smells like curry"}
-];
-var blends = [
-  {"BlendID": 0, "BlendName": "Spicy Blend", "Quantity": 2, "BlendDescription": "very spicy"},
-  {"BlendID": 1, "BlendName": "not so Spicy Blend", "Quantity": 2, "BlendDescription": "not very spicy"}
-];
-var households = [
-  {"HouseholdID": 0, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "coolhouse", "Password": "1234"},
-  {"HouseholdID": 1, "AddressStreet": "idk", "AddressCity": "idk", "AddressState": "idk", "AddressZip": "idk", "CreationDate": "idk", "UserName": "coolhouse2", "Password": "1234"},
-];
-var members = [
-  {"MemberID": 0, "FirstName": "Adam", "MiddleName": "Christopher", "LastName": "Kerr", "HouseholdID": 0},
-  {"MemberID": 1, "FirstName": "Santosh", "MiddleName": "","LastName": "Ramesh", "HouseholdID": 1},
-  {"MemberID": 2, "FirstName": "Peter", "MiddleName": "","LastName": "Parker", "HouseholdID": 0},
-  {"MemberID": 3, "FirstName": "John", "MiddleName": "","LastName": "Smith", "HouseholdID": 1},
-  {"MemberID": 4, "FirstName": "Billy", "MiddleName": "","LastName": "Batson", "HouseholdID": 1}
-];
-var spice_blends = [
-  {"BlendID": 0, "SpiceID": 0},
-  {"BlendID": 0, "SpiceID": 1},
-  {"BlendID": 1, "SpiceID": 0},
-  {"BlendID": 1, "SpiceID": 1}
-];
-var household_following = [
-  {"HouseholdID_1": 0, "HouseholdID_2": 1},
-  {"HouseholdID_1": 1, "HouseholdID_2": 0}
-];
-var household_blends = [
-  {"HouseholdID": 0, "BlendID": 0},
-  {"HouseholdID": 0, "BlendID": 1},
-  {"HouseholdID": 1, "BlendID": 1},
-];
 
 
 // Default route, index/home page of the website
@@ -75,7 +40,26 @@ app.get('/households', function(req, res, next) {
     db.pool.query(query2, function (err, results, fields){
       res.status(200);
       res.render("householdPage", {
-        script: "./households.js",
+        script: "/households.js",
+        households: tempHouseholds,
+        household_following: results
+      });
+    });
+  });
+});
+
+// Households route, displays Household and Household_Following tables with search input
+app.get('/households/:search', function(req, res, next) {
+  var search = req.params.search;
+  console.log("Serving the Households Searched Page: " + search);
+  var query1 = "SELECT * FROM Households WHERE " + '"' + search + '"' + " in (HouseholdID, AddressStreet, AddressCity, AddressState, AddressZip, CreationDate, UserName, Password);";
+  var query2 = "SELECT * FROM Household_Followings;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempHouseholds = results;
+    db.pool.query(query2, function (err, results, fields){
+      res.status(200);
+      res.render("householdPage", {
+        script: "/households.js",
         households: tempHouseholds,
         household_following: results
       });
@@ -96,7 +80,29 @@ app.get('/members', function(req, res, next) {
         houseIDs.push(results[i]["HouseholdID"]);
       res.status(200);
       res.render("memberPage", {
-        script: "./members.js",
+        script: "/members.js",
+        members: tempMembers,
+        householdIDs: houseIDs
+      });
+    });
+  });
+});
+
+// Members route, displays Member table with search input
+app.get('/members/:search', function(req, res, next) {
+  var search = req.params.search;
+  console.log("Serving the Members Searched Page: " + search);
+  var query1 = "SELECT * FROM Members WHERE " + '"' + search + '"' + " in (MemberID, FirstName, MiddleName, LastName, HouseholdID);";
+  var query2 = "SELECT * FROM Households;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempMembers = results;
+    db.pool.query(query2, function (err, results, fields){
+      var houseIDs = [];
+      for(var i = 0; i < results.length; i++)
+        houseIDs.push(results[i]["HouseholdID"]);
+      res.status(200);
+      res.render("memberPage", {
+        script: "/members.js",
         members: tempMembers,
         householdIDs: houseIDs
       });
@@ -117,7 +123,31 @@ app.get('/spices', function(req, res, next) {
       db.pool.query(query3, function (err, results, fields){
         res.status(200);
         res.render("spicePage", {
-          script: "./spices.js",
+          script: "/spices.js",
+          spices: tempSpices,
+          blends: tempBlends,
+          spice_blends: results
+        });
+      });
+    });
+  });
+});
+
+// Spices route, displays Spice, Blend, and Spice_Blend tables with search input
+app.get('/spices/:search', function(req, res, next) {
+  var search = req.params.search;
+  console.log("Serving the Members Searched Page: " + search);
+  var query1 = "SELECT * FROM Spices WHERE " + '"' + search + '"' + " in (SpiceID, SpiceName, SpiceDescription);";
+  var query2 = "SELECT * FROM Blends;";
+  var query3 = "SELECT * FROM Spice_Blends;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempSpices = results;
+    db.pool.query(query2, function (err, results, fields){
+      var tempBlends = results;
+      db.pool.query(query3, function (err, results, fields){
+        res.status(200);
+        res.render("spicePage", {
+          script: "/spices.js",
           spices: tempSpices,
           blends: tempBlends,
           spice_blends: results
@@ -140,7 +170,31 @@ app.get('/blends', function(req, res, next) {
       db.pool.query(query3, function (err, results, fields){
         res.status(200);
         res.render("blendPage", {
-          script: "./blends.js",
+          script: "/blends.js",
+          blends: tempBlends,
+          households: tempHouseholds,
+          household_blends: results
+        });
+      });
+    });
+  });
+});
+
+// Blends route, displays Household, Blend, and Household_Blend tables with search
+app.get('/blends/:search', function(req, res, next) {
+  var search = req.params.search;
+  console.log("Serving the Blends Searched Page: " + search);
+  var query1 = "SELECT * FROM Blends WHERE " + '"' + search + '"' + " in (BlendID, BlendName, Quantity, BlendDescription);";
+  var query2 = "SELECT * FROM Households;";
+  var query3 = "SELECT * FROM Household_Blends;";
+  db.pool.query(query1, function (err, results, fields){
+    var tempBlends = results;
+    db.pool.query(query2, function (err, results, fields){
+      var tempHouseholds = results;
+      db.pool.query(query3, function (err, results, fields){
+        res.status(200);
+        res.render("blendPage", {
+          script: "/blends.js",
           blends: tempBlends,
           households: tempHouseholds,
           household_blends: results
@@ -157,6 +211,78 @@ app.get('*', function(req, res){
   res.render('404Page', {
   });
 });
+
+
+/*
+    POST ROUTES
+*/
+
+
+// make Households route, inserts row into Households table from body data
+app.post("/makeHouse", function(req, res){
+  var d = new Date();
+  var date = '"' + (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear() + '"';
+  var query = "INSERT INTO Households (AddressStreet, AddressCity, AddressState, AddressZip, CreationDate, UserName, Password) VALUES (" + req.body.str + ", " + req.body.city + ", " + req.body.state + ", " + req.body.zip + ", STR_TO_DATE(" + date + ", '%m/%d/%Y'), " + req.body.name + ", " + req.body.pwd + ");";
+  console.log("Making Household with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
+// make Households To Households route, inserts row into Households_following table from body data
+app.post("/makeHouseToHouse", function(req, res){
+  var query = "INSERT INTO Household_Followings (HouseholdID_1, HouseholdID_2) VALUES(" + req.body.hIDO + ", " + req.body.hIDT + ");";
+  console.log("Making HouseToHouse with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
+// make Member route, inserts row into Members table from body data
+app.post("/makeMember", function(req, res){
+  var query = "INSERT INTO Members (FirstName, MiddleName, LastName, HouseholdID) VALUES(" + req.body.fname + ", " + req.body.mname + ", " + req.body.lname + ", " + req.body.hID+ ");";
+  console.log("Making Member with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
+// make Spice route, inserts row into Spices table from body data
+app.post("/makeSpice", function(req, res){
+  var query = "INSERT INTO Spices (SpiceName, SpiceDescription) VALUES(" + req.body.s + ", " + req.body.d + ");";
+  console.log("Making blend with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
+// make Spice To Blend route, inserts row into Spice_Blends table from body data
+app.post("/makeSpiceToBlend", function(req, res){
+  var query = "INSERT INTO Spice_Blends (BlendID, SpiceID) VALUES(" + req.body.bID + ", " + req.body.sID + ");";
+  console.log("Making BlendToHouse with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
+// make Blend route, inserts row into Blends table from body data
+app.post("/makeBlend", function(req, res){
+  var query = "INSERT INTO Blends (BlendName, Quantity, BlendDescription) VALUES (" + req.body.n + ", " + req.body.q + ", " + req.body.d + ");";
+  console.log("Making blend with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
+// make Blend to Households route, inserts row into Household_Blends table from body data
+app.post("/makeBlendToHouse", function(req, res){
+  var query = "INSERT INTO Household_Blends (HouseholdID, BlendID) VALUES (" + req.body.hID + ", " + req.body.bID + ");";
+  console.log("Making BlendToHouse with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  })
+});
+
 
 // Listen to the port defined at top
 app.listen(port, function(){

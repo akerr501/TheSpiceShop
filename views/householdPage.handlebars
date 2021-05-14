@@ -1,14 +1,14 @@
 {{!-- Households page, displays Household and Household_Following tables --}}
 
 <main class="households-container">
-<input type="text" placeholder="Search..." class="search" name="search">
-<input type="submit" value="Search" class="search-submit">
+<input type="text" placeholder="Search..." class="search" name="search" id = "search">
+<a href="/households" id="myLink"><input type="submit" value="Search" class="search-submit" id ="search-submit"></a>
 {{> etable title="Households" map=households}}
 {{> table title="Household Following" map=household_following}}
 
 <br><br>
 <div id="form-container">
-  <form id="house-form">
+  <div id="house-form">
     <label for="straddr">Street Address:</label><br>
     <input type="text" id="straddr" name="straddr"><br>
     <label for="cityaddr">City:</label><br>
@@ -22,22 +22,22 @@
     <label for="pwd">Password:</label><br>
     <input type="password" id="pwd" name="pwd"><br><br>
     <input type="submit" value="Submit" id="house-submit">
-  </form>
+  </div>
   <br><br>
-  <form id="housetohouse-form">
+  <div id="housetohouse-form">
     <label for="households1">Household ID:</label><br>
-    <select name="households1" id="member-dropdown">
+    <select name="households1" id="household1-dropdown">
       {{#each households}}
         <option value="{{HouseholdID}}">{{HouseholdID}}</option>
       {{/each}}
     </select><br>
     <label for="households2">Following Household ID:</label><br>
-    <select name="households2" id="household-dropdown">
+    <select name="households2" id="household2-dropdown">
       {{#each households}}
         <option value="{{HouseholdID}}">{{HouseholdID}}</option>
       {{/each}}
     </select><br><br>
     <input type="submit" value="Submit" id="housetohouse-submit">
-  </form>
+  </div>
 </div>
 </main>
