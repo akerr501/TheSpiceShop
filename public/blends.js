@@ -26,16 +26,16 @@ function blendClick(){
   location.reload();
 }
 
-function searchChange(){
+function searchClick(){
   var search = document.getElementById("search").value;
-  if(search.length > 0) document.getElementById("myLink").href = "/blends/" + search;
-  else document.getElementById("myLink").href = "/blends";
+  if(search.length > 0) window.location.assign("/blends/" + search);
+  else window.location.assign("/blends");
 }
 
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById("blendtohouse-submit").addEventListener("click", blendToHouseClick);
   document.getElementById("blend-submit").addEventListener("click", blendClick);
-  document.getElementById("search").addEventListener("input", searchChange);
+  document.getElementById("search-submit").addEventListener("click", searchClick);
 
 
   var rows = document.getElementsByClassName("data-row editable");

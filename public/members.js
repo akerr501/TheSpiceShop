@@ -15,16 +15,16 @@ function memberClick(){
   location.reload();
 }
 
-function searchChange(){
+function searchClick(){
   var search = document.getElementById("search").value;
-  if(search.length > 0) document.getElementById("myLink").href = "/members/" + search;
-  else document.getElementById("myLink").href = "/members";
+  if(search.length > 0) window.location.assign("/members/" + search);
+  else window.location.assign("/members");
 }
 
 
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById("member-submit").addEventListener("click", memberClick);
-  document.getElementById("search").addEventListener("input", searchChange);
+  document.getElementById("search-submit").addEventListener("click", searchClick);
 
   var rows = document.getElementsByClassName("data-row");
   for (row of rows) {

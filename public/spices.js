@@ -24,16 +24,16 @@ function spiceToBlendClick(){
   location.reload();
 }
 
-function searchChange(){
+function searchClick(){
   var search = document.getElementById("search").value;
-  if(search.length > 0) document.getElementById("myLink").href = "/spices/" + search;
-  else document.getElementById("myLink").href = "/spices";
+  if(search.length > 0) window.location.assign("/spices/" + search);
+  else window.location.assign("/spices");
 }
 
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById("spice-submit").addEventListener("click", spiceClick);
   document.getElementById("spicetoblend-submit").addEventListener("click", spiceToBlendClick);
-  document.getElementById("search").addEventListener("input", searchChange);
+  document.getElementById("search-submit").addEventListener("click", searchClick);
 
 
   var rows = document.getElementsByClassName("data-row editable");

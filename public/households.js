@@ -32,16 +32,16 @@ function houseToHouseClick(){
   location.reload();
 }
 
-function searchChange(){
+function searchClick(){
   var search = document.getElementById("search").value;
-  if(search.length > 0) document.getElementById("myLink").href = "/households/" + search;
-  else document.getElementById("myLink").href = "/households";
+  if(search.length > 0) window.location.assign("/households/" + search);
+  else window.location.assign("/households");
 }
 
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById("house-submit").addEventListener("click", houseClick);
   document.getElementById("housetohouse-submit").addEventListener("click", houseToHouseClick);
-  document.getElementById("search").addEventListener("input", searchChange);
+  document.getElementById("search-submit").addEventListener("click", searchClick);
 
   var rows = document.getElementsByClassName("data-row editable");
   for (row of rows) {
