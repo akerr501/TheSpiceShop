@@ -32,6 +32,55 @@ function searchClick(){
   else window.location.assign("/blends");
 }
 
+function deleteClick(){
+  id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
+  console.log("DELETE: " + id);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/deleteBlend", false);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({
+    id: id
+  }));
+  location.reload();
+}
+
+function toggleEditable(columns){
+  console.log(columns);
+  for(var i = 1; i < columns.length-2; i++){
+    var input = columns[i].children[0];
+    editable = input.contentEditable;
+    if(editable == "true") input.contentEditable = "false";
+    else input.contentEditable = "true";
+  }
+}
+
+function updateClick(){
+  id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
+  var columns = this.parentElement.parentElement.children;
+  console.log(this.value);
+  console.log("UPDATE: " + id);
+  if(this.value === "Edit"){
+    this.value = "Done";
+    toggleEditable(columns);
+  }
+  else {
+    var name = columns[1].children[0].textContent;
+    var quantity = parseInt(columns[2].children[0].textContent);
+    var description = columns[3].children[0].textContent;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/updateBlend");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      id: id,
+      name: '"' + name + '"',
+      quantity: quantity,
+      description: '"' + description + '"'
+    }));
+    toggleEditable(columns);
+    this.value = "Edit";
+  }
+}
+
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById("blendtohouse-submit").addEventListener("click", blendToHouseClick);
   document.getElementById("blend-submit").addEventListener("click", blendClick);
@@ -41,21 +90,7 @@ window.addEventListener('DOMContentLoaded', function () {
   var rows = document.getElementsByClassName("data-row editable");
   for (row of rows) {
     children = row.children;
-    children[children.length - 1].children[0].addEventListener('click', function() {
-      id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
-      console.log("DELETE: " + id);
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/deleteBlend", false);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify({
-        id: id
-      }));
-      location.reload();
-    });
-    children[children.length - 2].children[0].addEventListener('click', function() {
-      id = parseInt(this.id[this.id.length - 1]) + 1;
-      console.log(this.value);
-      console.log("UPDATE: " + id);
-    });
+    children[children.length - 1].children[0].addEventListener('click', deleteClick);
+    children[children.length - 2].children[0].addEventListener('click', updateClick);
   }
 });

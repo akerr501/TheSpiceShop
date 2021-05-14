@@ -38,6 +38,61 @@ function searchClick(){
   else window.location.assign("/households");
 }
 
+function deleteClick(){
+  id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
+  console.log("DELETE: " + id);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/deleteHousehold", false);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({
+    id: id
+  }));
+  location.reload();
+}
+
+function toggleEditable(columns){
+  console.log(columns);
+  for(var i = 1; i < columns.length-2; i++){
+    var input = columns[i].children[0];
+    editable = input.contentEditable;
+    if(editable == "true") input.contentEditable = "false";
+    else if(i != 5) input.contentEditable = "true";
+  }
+}
+
+function updateClick(){
+  id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
+  var columns = this.parentElement.parentElement.children;
+  console.log(this.value);
+  console.log("UPDATE: " + id);
+  if(this.value === "Edit"){
+    this.value = "Done";
+    toggleEditable(columns);
+  }
+  else {
+    var str = columns[1].children[0].textContent;
+    var city = columns[2].children[0].textContent;
+    var state = columns[3].children[0].textContent;
+    var zip = columns[4].children[0].textContent;
+    var name = columns[6].children[0].textContent;
+    var pwd = columns[7].children[0].textContent;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/updateHousehold");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      id: id,
+      str: '"' + str + '"',
+      city: '"' + city + '"',
+      state: '"' + state + '"',
+      zip: '"' + zip + '"',
+      name: '"' + name + '"',
+      pwd: '"' + pwd + '"'
+    }));
+    toggleEditable(columns);
+    this.value = "Edit";
+  }
+}
+
 window.addEventListener('DOMContentLoaded', function () {
   document.getElementById("house-submit").addEventListener("click", houseClick);
   document.getElementById("housetohouse-submit").addEventListener("click", houseToHouseClick);
@@ -46,21 +101,7 @@ window.addEventListener('DOMContentLoaded', function () {
   var rows = document.getElementsByClassName("data-row editable");
   for (row of rows) {
     children = row.children;
-    children[children.length - 1].children[0].addEventListener('click', function() {
-      id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
-      console.log("DELETE: " + id);
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "/deleteHousehold", false);
-      xhr.setRequestHeader('Content-Type', 'application/json');
-      xhr.send(JSON.stringify({
-        id: id
-      }));
-      location.reload();
-    });
-    children[children.length - 2].children[0].addEventListener('click', function() {
-      id = parseInt(this.id[this.id.length - 1]) + 1;
-      console.log(this.value);
-      console.log("UPDATE: " + id);
-    });
+    children[children.length - 1].children[0].addEventListener('click', deleteClick);
+    children[children.length - 2].children[0].addEventListener('click', updateClick);
   }
 });

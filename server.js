@@ -337,6 +337,60 @@ app.post("/deleteMember", function(req, res){
   });
 });
 
+// update Household route, updates row into Household table from body data
+app.post("/updateHousehold", function(req, res){
+  var query = "UPDATE Households SET " +
+  " AddressStreet = " + req.body.str + "," +
+  " AddressCity = " + req.body.city + "," +
+  " AddressState = " + req.body.state + "," +
+  " AddressZip = " + req.body.zip + "," +
+  " UserName = " + req.body.name + "," +
+  " Password = " + req.body.pwd +
+  " WHERE HouseholdID = " + req.body.id + ";";
+  console.log("Updating Household with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  });
+});
+
+// update Member route, updates row into Member table from body data
+app.post("/updateMember", function(req, res){
+  var query = "UPDATE Members SET " +
+  " FirstName = " + req.body.fname + "," +
+  " MiddleName = " + req.body.mname + "," +
+  " LastName = " + req.body.lname +
+  " WHERE MemberID = " + req.body.id + ";";
+  console.log("Updating Member with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  });
+});
+
+// update Spice route, updates row into Spices table from body data
+app.post("/updateSpice", function(req, res){
+  var query = "UPDATE Spices SET " +
+  " SpiceName = " + req.body.name + "," +
+  " SpiceDescription = " + req.body.description +
+  " WHERE SpiceID = " + req.body.id + ";";
+  console.log("Updating Spice with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  });
+});
+
+// update Blend route, updates row into Blend table from body data
+app.post("/updateBlend", function(req, res){
+  var query = "UPDATE Blends SET " +
+  " BlendName = " + req.body.name + "," +
+  " Quantity = " + req.body.quantity + "," +
+  " BlendDescription = " + req.body.description +
+  " WHERE BlendID = " + req.body.id + ";";
+  console.log("Updating Blend with query: " + query);
+  db.pool.query(query, function (err, results, fields){
+    res.send(results);
+  });
+});
+
 
 // Listen to the port defined at top
 app.listen(port, function(){

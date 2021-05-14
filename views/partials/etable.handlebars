@@ -24,7 +24,7 @@ var spices = [
   {{#each map}}
     <tr class="data-row editable" id="editable-{{@index}}">
     	{{#each this}}
-        <td class="data"><p id="editable">{{this}}</p></td>
+        <td class="data"><p contenteditable="false" id="editable">{{this}}</p></td>
       {{/each}}
       <td class="edit"><input type="submit" value="Edit" id="edit-button-{{@index}}"></td>
       <td class="edit"><input type="submit" value="Delete" class="delete" id="delete-button-{{@index}}"></td>
