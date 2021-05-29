@@ -1,29 +1,33 @@
 function blendToHouseClick(){
   var hID = document.getElementById('household-dropdown').value;
   var bID = document.getElementById('blend-dropdown').value;
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/makeBlendToHouse");
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({
-    hID: hID,
-    bID: bID
-  }));
-  location.reload();
+  if(hID.length > 0 && bID.length > 0){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/makeBlendToHouse");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      hID: hID,
+      bID: bID
+    }));
+    location.reload();
+  }
 }
 
 function blendClick(){
   var name = document.getElementById('bname').value;
   var quantity = document.getElementById('quantity').value;
   var description = document.getElementById('bdescription').value;
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/makeBlend");
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({
-    n: '"' + name + '"',
-    q: quantity,
-    d: '"' +  description + '"'
-  }));
-  location.reload();
+  if(name.length > 0 && quantity.length > 0 && description.length > 0){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/makeBlend");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      n: '"' + name + '"',
+      q: quantity,
+      d: '"' +  description + '"'
+    }));
+    location.reload();
+  }
 }
 
 function searchClick(){

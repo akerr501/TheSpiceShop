@@ -75,7 +75,7 @@ app.get('/members', function(req, res, next) {
   db.pool.query(query1, function (err, results, fields){
     var tempMembers = results;
     db.pool.query(query2, function (err, results, fields){
-      var houseIDs = [];
+      var houseIDs = [null];
       for(var i = 0; i < results.length; i++)
         houseIDs.push(results[i]["HouseholdID"]);
       res.status(200);
@@ -97,7 +97,7 @@ app.get('/members/:search', function(req, res, next) {
   db.pool.query(query1, function (err, results, fields){
     var tempMembers = results;
     db.pool.query(query2, function (err, results, fields){
-      var houseIDs = [];
+      var houseIDs = [null];
       for(var i = 0; i < results.length; i++)
         houseIDs.push(results[i]["HouseholdID"]);
       res.status(200);
@@ -290,6 +290,7 @@ app.post("/deleteHousehold", function(req, res){
   var query3 = "DELETE FROM Household_Followings WHERE HouseholdID_1 = " + req.body.id + " OR HouseholdID_2 = " + req.body.id + ";";
   var query4 = "DELETE FROM Households WHERE HouseholdID = " + req.body.id + ";";
   console.log("Deleting Household with query: " + query4);
+  // delete intersection tables and members before deleting households
   db.pool.query(query1, function (err, results, fields){
     db.pool.query(query2, function (err, results, fields){
       db.pool.query(query3, function (err, results, fields){
@@ -307,6 +308,7 @@ app.post("/deleteBlend", function(req, res){
   var query2 = "DELETE FROM Household_Blends WHERE BlendID = " + req.body.id + ";";
   var query3 = "DELETE FROM Blends WHERE BlendID = " + req.body.id + ";";
   console.log("Deleting Blend with query: " + query3);
+  // delete two intersection tables before deleting blend table
   db.pool.query(query1, function (err, results, fields){
     db.pool.query(query2, function (err, results, fields){
       db.pool.query(query3, function (err, results, fields){
@@ -321,6 +323,7 @@ app.post("/deleteSpice", function(req, res){
   var query1 = "DELETE FROM Spice_Blends WHERE SpiceID = " + req.body.id + ";";
   var query2 = "DELETE FROM Spices WHERE SpiceID = " + req.body.id + ";";
   console.log("Deleting Spice with query: " + query1);
+  // delete intersection table before deleting spices
   db.pool.query(query1, function (err, results, fields){
     db.pool.query(query2, function (err, results, fields){
       res.send(results);
