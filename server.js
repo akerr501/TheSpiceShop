@@ -76,8 +76,10 @@ app.get('/members', function(req, res, next) {
     var tempMembers = results;
     db.pool.query(query2, function (err, results, fields){
       var houseIDs = [null];
-      for(var i = 0; i < results.length; i++)
-        houseIDs.push(results[i]["HouseholdID"]);
+      if(results !== undefined){
+        for(var i = 0; i < results.length; i++)
+          houseIDs.push(results[i]["HouseholdID"]);
+      }
       res.status(200);
       res.render("memberPage", {
         script: "/members.js",
@@ -98,8 +100,10 @@ app.get('/members/:search', function(req, res, next) {
     var tempMembers = results;
     db.pool.query(query2, function (err, results, fields){
       var houseIDs = [null];
-      for(var i = 0; i < results.length; i++)
-        houseIDs.push(results[i]["HouseholdID"]);
+      if(results !== undefined){
+        for(var i = 0; i < results.length; i++)
+          houseIDs.push(results[i]["HouseholdID"]);
+      }
       res.status(200);
       res.render("memberPage", {
         script: "/members.js",
