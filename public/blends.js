@@ -17,7 +17,7 @@ function blendClick(){
   var name = document.getElementById('bname').value;
   var quantity = document.getElementById('quantity').value;
   var description = document.getElementById('bdescription').value;
-  if(name.length > 0 && quantity.length > 0){
+  if(name.length > 0 && quantity > 0){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/makeBlend");
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -27,6 +27,8 @@ function blendClick(){
       d: '"' +  description + '"'
     }));
     location.reload();
+  } else{
+    window.alert("Please enter a value for BlendName and a Quantity > 0");
   }
 }
 
@@ -77,17 +79,22 @@ function updateClick(){
     var name = columns[1].children[0].textContent;
     var quantity = parseInt(columns[2].children[0].textContent);
     var description = columns[3].children[0].textContent;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/updateBlend");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-      id: id,
-      name: '"' + name + '"',
-      quantity: quantity,
-      description: '"' + description + '"'
-    }));
-    toggleEditable(columns);
-    this.value = "Edit";
+    if(name.length > 0 && quantity > 0 && quantity != "NaN"){
+      console.log("the quanity is: " + quantity);
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/updateBlend");
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+        id: id,
+        name: '"' + name + '"',
+        quantity: quantity,
+        description: '"' + description + '"'
+      }));
+      toggleEditable(columns);
+      this.value = "Edit";
+    } else{
+      window.alert("Please enter a value for BlendName and a Quantity > 0");
+    }
   }
 }
 

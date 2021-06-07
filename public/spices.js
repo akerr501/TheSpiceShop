@@ -10,6 +10,8 @@ function spiceClick(){
       d: '"' + description + '"'
     }));
     location.reload();
+  } else{
+    window.alert("Please enter a value for SpiceName and SpiceDescription");
   }
 }
 
@@ -73,16 +75,20 @@ function updateClick(){
   else {
     var name = columns[1].children[0].textContent;
     var description = columns[2].children[0].textContent;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/updateSpice");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-      id: id,
-      name: '"' + name + '"',
-      description: '"' + description + '"'
-    }));
-    toggleEditable(columns);
-    this.value = "Edit";
+    if (name.length > 0 && description.length > 0){
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/updateSpice");
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+        id: id,
+        name: '"' + name + '"',
+        description: '"' + description + '"'
+      }));
+      toggleEditable(columns);
+      this.value = "Edit";
+    } else{
+      window.alert("Please enter a value for SpiceName and SpiceDescription");
+    }
   }
 }
 
