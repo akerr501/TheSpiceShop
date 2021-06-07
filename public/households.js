@@ -55,8 +55,14 @@ function toggleEditable(columns){
   for(var i = 1; i < columns.length-2; i++){
     var input = columns[i].children[0];
     editable = input.contentEditable;
-    if(editable == "true") input.contentEditable = "false";
-    else if(i != 5) input.contentEditable = "true";
+    if(editable == "true"){
+      input.contentEditable = "false";
+      input.style.color = "black";
+    }
+    else if (i != 5){
+      input.contentEditable = "true";
+      input.style.color = "red";
+    }
   }
 }
 
