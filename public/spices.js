@@ -1,14 +1,16 @@
 function spiceClick(){
   var sname = document.getElementById('sname').value;
   var description = document.getElementById('sdescription').value;
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/makeSpice");
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({
-    s: '"' + sname + '"',
-    d: '"' + description + '"'
-  }));
-  location.reload();
+  if(sname.length > 0 && description.length > 0){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/makeSpice");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      s: '"' + sname + '"',
+      d: '"' + description + '"'
+    }));
+    location.reload();
+  }
 }
 
 function spiceToBlendClick(){

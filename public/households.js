@@ -5,18 +5,21 @@ function houseClick(){
   var zip = document.getElementById('zipaddr').value;
   var username = document.getElementById('username').value;
   var pwd = document.getElementById('pwd').value;
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/makeHouse");
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({
-    str: '"' + str + '"',
-    city: '"' + city + '"',
-    state: '"' + state + '"',
-    zip: '"' + zip + '"',
-    name: '"' + username + '"',
-    pwd: '"' + pwd + '"'
-  }));
-  location.reload();
+  if(str.length > 0 && city.length > 0 && state.length > 0
+      && zip.length > 0 && username.length > 0 && pwd.length > 0){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/makeHouse");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      str: '"' + str + '"',
+      city: '"' + city + '"',
+      state: '"' + state + '"',
+      zip: '"' + zip + '"',
+      name: '"' + username + '"',
+      pwd: '"' + pwd + '"'
+    }));
+    location.reload();
+  }
 }
 
 function houseToHouseClick(){

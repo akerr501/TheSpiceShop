@@ -3,16 +3,18 @@ function memberClick(){
   var mname = document.getElementById('mname').value;
   var lname = document.getElementById('lname').value;
   var hID = document.getElementById('member-dropdown').value;
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "/makeMember");
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({
-    fname: '"' + fname + '"',
-    mname: '"' + mname + '"',
-    lname: '"' + lname + '"',
-    hID: hID
-  }));
-  location.reload();
+  if(fname.length > 0 && lname.length > 0){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/makeMember");
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+      fname: '"' + fname + '"',
+      mname: '"' + mname + '"',
+      lname: '"' + lname + '"',
+      hID: hID
+    }));
+    location.reload();
+  }
 }
 
 function searchClick(){
