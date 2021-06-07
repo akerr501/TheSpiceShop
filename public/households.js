@@ -19,6 +19,8 @@ function houseClick(){
       pwd: '"' + pwd + '"'
     }));
     location.reload();
+  } else{
+    window.alert("Please enter a value for AddressStreet, AddressCity, AddressState, AddressZip, Username, and Password");
   }
 }
 
@@ -86,19 +88,24 @@ function updateClick(){
     var name = columns[6].children[0].textContent;
     var pwd = columns[7].children[0].textContent;
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/updateHousehold");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-      id: id,
-      str: '"' + str + '"',
-      city: '"' + city + '"',
-      state: '"' + state + '"',
-      zip: '"' + zip + '"',
-      name: '"' + name + '"',
-      pwd: '"' + pwd + '"'
-    }));
-    toggleEditable(columns);
-    this.value = "Edit";
+    if(str.length > 0 && city.length > 0 && state.length > 0
+      && zip > 0 && name.length > 0 && pwd.length > 0){
+      xhr.open("POST", "/updateHousehold");
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+        id: id,
+        str: '"' + str + '"',
+        city: '"' + city + '"',
+        state: '"' + state + '"',
+        zip: '"' + zip + '"',
+        name: '"' + name + '"',
+        pwd: '"' + pwd + '"'
+      }));
+      toggleEditable(columns);
+      this.value = "Edit";
+    } else{
+      window.alert("Please enter a value for AddressStreet, AddressCity, AddressState, AddressZip, Username, and Password");
+    }
   }
 }
 

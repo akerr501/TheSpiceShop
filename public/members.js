@@ -14,6 +14,8 @@ function memberClick(){
       hID: hID
     }));
     location.reload();
+  }  else{
+    window.alert("Please enter a value for Firstname and LastName");
   }
 }
 
@@ -70,6 +72,7 @@ function toggleEditable(columns){
   }
 }
 
+// errors: (1) not adding to database values without the householdid, (2) unable to edit the householdid twice
 function updateClick(){
   id = parseInt(this.parentElement.parentElement.children[0].children[0].textContent);
   var columns = this.parentElement.parentElement.children;
@@ -97,6 +100,8 @@ function updateClick(){
         hid: hID
       }));
       this.value = "Edit";
+    } else{
+      window.alert("Please enter a value for Firstname and LastName");
     }
   }
 }
