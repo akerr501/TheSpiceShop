@@ -64,7 +64,7 @@ function toggleEditable(columns){
         input.parentNode.replaceChild(dropdown, input);
       }
       else {
-        // otherwise, just change content to editrable and red text
+        // otherwise, just change content to editable and red text
         input.contentEditable = "true";
         input.style.color = "red";
       }
@@ -73,14 +73,12 @@ function toggleEditable(columns){
       if(i == 4){ // if dropdown
         // create new paragraph to replace with
         var p = document.createElement("p");
-        // select dropdown
-        var dropdown = document.getElementById("member-dropdown2");
         // copy dropdown over to paragraph
-        p.textContent = dropdown.value;
+        p.textContent = input.value;
         p.id = "editable";
         p.contentEditable = "false";
         // replace dropdown with paragraph
-        dropdown.parentNode.replaceChild(p, dropdown);
+        input.parentNode.replaceChild(p, input);
       }
       else{ // otherwise just change to not be editable and black text
         input.contentEditable = "false";
