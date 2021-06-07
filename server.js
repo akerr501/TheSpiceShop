@@ -365,7 +365,8 @@ app.post("/updateMember", function(req, res){
   var query = "UPDATE Members SET " +
   " FirstName = " + req.body.fname + "," +
   " MiddleName = " + req.body.mname + "," +
-  " LastName = " + req.body.lname +
+  " LastName = " + req.body.lname + "," +
+  " HouseholdID = " + req.body.hid +
   " WHERE MemberID = " + req.body.id + ";";
   console.log("Updating Member with query: " + query);
   db.pool.query(query, function (err, results, fields){

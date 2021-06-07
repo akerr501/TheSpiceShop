@@ -37,16 +37,35 @@ function deleteClick(){
 
 function toggleEditable(columns){
   console.log(columns);
-  for(var i = 1; i < columns.length-3; i++){
+  for(var i = 1; i < columns.length-2; i++){
     var input = columns[i].children[0];
     editable = input.contentEditable;
-    if(editable == "true"){
-      input.contentEditable = "false";
-      input.style.color = "black";
+    if(editable == "false"){
+      if(i == 4){
+        var dropdown = document.getElementById("member-dropdown").cloneNode(true);
+        dropdown.style.color = "red";
+        dropdown.value = input.textContent;
+        for(var j = 0; j < dropdown.children.length; j++) dropdown.children[j].style.color = "red";
+        dropdown.id = "member-dropdown2";
+        input.parentNode.replaceChild(dropdown, input);
+      }
+      else {
+        input.contentEditable = "true";
+        input.style.color = "red";
+      }
     }
     else {
-      input.contentEditable = "true";
-      input.style.color = "red";
+      if(i == 4){
+        var p = document.createElement("p");
+        var dropdown = document.getElementById("member-dropdown2");
+        p.textContent = dropdown.value;
+        p.id = "editable";
+        dropdown.parentNode.replaceChild(p, dropdown);
+      }
+      else{
+        input.contentEditable = "false";
+        input.style.color = "black";
+      }
     }
   }
 }
@@ -60,21 +79,25 @@ function updateClick(){
     this.value = "Done";
     toggleEditable(columns);
   }
-  else {
+  else { // button text == done
     var fname = columns[1].children[0].textContent;
     var lname = columns[2].children[0].textContent;
     var mname = columns[3].children[0].textContent;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/updateMember");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify({
-      id: id,
-      fname: '"' + fname + '"',
-      mname: '"' + mname + '"',
-      lname: '"' + lname + '"'
-    }));
-    toggleEditable(columns);
-    this.value = "Edit";
+    if(fname.length > 0 && lname.length > 0){
+      toggleEditable(columns);
+      var hID = columns[4].children[0].textContent;
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "/updateMember");
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.send(JSON.stringify({
+        id: id,
+        fname: '"' + fname + '"',
+        mname: '"' + mname + '"',
+        lname: '"' + lname + '"',
+        hid: hID
+      }));
+      this.value = "Edit";
+    }
   }
 }
 
