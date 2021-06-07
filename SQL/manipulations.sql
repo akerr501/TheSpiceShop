@@ -90,7 +90,6 @@ AddressStreet = :strInput,
 AddressCity = :cityInput,
 AddressState = :staInput,
 AddressZip = :zipInput,
-CreationDate = :dateInput,
 UserName = :nameInput,
 Password = :passInput
 WHERE HouseholdID = :hid;
