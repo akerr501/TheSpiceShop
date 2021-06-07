@@ -17,7 +17,7 @@ function blendClick(){
   var name = document.getElementById('bname').value;
   var quantity = document.getElementById('quantity').value;
   var description = document.getElementById('bdescription').value;
-  if(name.length > 0 && quantity.length > 0 && description.length > 0){
+  if(name.length > 0 && quantity.length > 0){
     var xhr = new XMLHttpRequest();
     xhr.open("POST", "/makeBlend");
     xhr.setRequestHeader('Content-Type', 'application/json');
