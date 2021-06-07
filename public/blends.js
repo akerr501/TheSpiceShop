@@ -1,3 +1,6 @@
+// This is the javascript powering the blends page
+// Authors: Adam Kerr, Santosh Ramesh
+
 function blendToHouseClick(){
   // get ids from form
   var hID = document.getElementById('household-dropdown').value;

@@ -1,3 +1,6 @@
+// This is the javascript powering the members page
+// Authors: Adam Kerr, Santosh Ramesh
+
 function memberClick(){
   // get names and id from form
   var fname = document.getElementById('fname').value;

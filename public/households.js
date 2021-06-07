@@ -1,3 +1,6 @@
+// This is the javascript powering the households page
+// Authors: Adam Kerr, Santosh Ramesh
+
 function houseClick(){
   // get content from form
   var str = document.getElementById('straddr').value;

@@ -1,3 +1,6 @@
+// This is the javascript powering the spices page
+// Authors: Adam Kerr, Santosh Ramesh
+
 function spiceClick(){
   // get names and descirption from form
   var sname = document.getElementById('sname').value;
